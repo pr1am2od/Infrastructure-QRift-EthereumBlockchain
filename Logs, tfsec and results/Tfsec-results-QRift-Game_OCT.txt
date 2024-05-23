@@ -1,0 +1,186 @@
+TFSEC results , need some hardening here:
+--------------------------------------------
+
+
+
+
+
+PS C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project> tfsec
+
+Result #1 CRITICAL Security group rule allows ingress from public internet. 
+────────────────────────────────────────────────────────────────────────────────
+  C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project\Terraform\main.tf:42
+────────────────────────────────────────────────────────────────────────────────
+   34    resource "aws_security_group" "webserver" {
+   ..  
+   42  [     cidr_blocks = ["0.0.0.0/0"]
+   ..  
+   51    }
+────────────────────────────────────────────────────────────────────────────────
+          ID aws-ec2-no-public-ingress-sgr
+      Impact Your port exposed to the internet
+  Resolution Set a more restrictive cidr range
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.1/checks/aws/ec2/no-public-ingress-sgr/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule#cidr_blocks
+────────────────────────────────────────────────────────────────────────────────
+
+
+Result #2 CRITICAL Security group rule allows egress to multiple public internet addresses.
+────────────────────────────────────────────────────────────────────────────────
+  C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project\Terraform\main.tf:49
+────────────────────────────────────────────────────────────────────────────────
+   34    resource "aws_security_group" "webserver" {
+   ..
+   49  [     cidr_blocks = ["0.0.0.0/0"]
+   ..
+   51    }
+────────────────────────────────────────────────────────────────────────────────
+          ID aws-ec2-no-public-egress-sgr
+      Impact Your port is egressing data to the internet
+  Resolution Set a more restrictive cidr range
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.1/checks/aws/ec2/no-public-egress-sgr/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+────────────────────────────────────────────────────────────────────────────────
+
+
+Result #3 HIGH Instance does not require IMDS access to require a token
+────────────────────────────────────────────────────────────────────────────────
+  C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project\Terraform\main.tf:53-58
+────────────────────────────────────────────────────────────────────────────────
+   53    resource "aws_instance" "webserver" {
+   54      ami           = "ami-ubuntu-03e03b052f08281b2"
+   55      instance_type = "t4g.micnanoro"
+   56      subnet_id    = aws_subnet.public.id
+   57      vpc_security_group_ids = [aws_security_group.webserver.id]
+   58    }
+────────────────────────────────────────────────────────────────────────────────
+          ID aws-ec2-enforce-http-token-imds
+      Impact Instance metadata service can be interacted with freely
+  Resolution Enable HTTP token requirement for IMDS
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.1/checks/aws/ec2/enforce-http-token-imds/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#metadata-options
+────────────────────────────────────────────────────────────────────────────────
+
+
+Result #4 HIGH Root block device is not encrypted.
+────────────────────────────────────────────────────────────────────────────────
+  C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project\Terraform\main.tf:53-58
+────────────────────────────────────────────────────────────────────────────────
+   53    resource "aws_instance" "webserver" {
+   54      ami           = "ami-ubuntu-03e03b052f08281b2"
+   55      instance_type = "t4g.micnanoro"
+   56      subnet_id    = aws_subnet.public.id
+   57      vpc_security_group_ids = [aws_security_group.webserver.id]
+   58    }
+────────────────────────────────────────────────────────────────────────────────
+          ID aws-ec2-enable-at-rest-encryption
+      Impact The block device could be compromised and read from
+  Resolution Turn on encryption for all block devices
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.1/checks/aws/ec2/enable-at-rest-encryption/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#ebs-ephemeral-and-root-block-devices
+────────────────────────────────────────────────────────────────────────────────
+
+
+Result #5 MEDIUM VPC Flow Logs is not enabled for VPC
+────────────────────────────────────────────────────────────────────────────────
+  C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project\Terraform\main.tf:5-7
+────────────────────────────────────────────────────────────────────────────────
+    5    resource "aws_vpc" "main" {
+    6      cidr_block = "10.31.0.0/16"
+    7    }
+────────────────────────────────────────────────────────────────────────────────
+          ID aws-ec2-require-vpc-flow-logs-for-all-vpcs
+      Impact Without VPC flow logs, you risk not having enough information about network traffic flow to investigate incidents or identify security issues.  
+  Resolution Enable flow logs for VPC
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.1/checks/aws/ec2/require-vpc-flow-logs-for-all-vpcs/
+────────────────────────────────────────────────────────────────────────────────
+
+
+Result #6 LOW Security group rule does not have a description.
+────────────────────────────────────────────────────────────────────────────────
+  C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project\Terraform\main.tf:38-43
+────────────────────────────────────────────────────────────────────────────────
+   34    resource "aws_security_group" "webserver" {
+   ..
+   38  ┌   ingress {
+   39  │     from_port = 80
+   40  │     to_port = 80
+   41  │     protocol = "tcp"
+   42  │     cidr_blocks = ["0.0.0.0/0"]
+   43  └   }
+   ..
+   51    }
+────────────────────────────────────────────────────────────────────────────────
+          ID aws-ec2-add-description-to-security-group-rule
+      Impact Descriptions provide context for the firewall rule reasons
+  Resolution Add descriptions for all security groups rules
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.1/checks/aws/ec2/add-description-to-security-group-rule/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+────────────────────────────────────────────────────────────────────────────────
+
+
+Result #7 LOW Security group rule does not have a description.
+────────────────────────────────────────────────────────────────────────────────
+  C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project\Terraform\main.tf:45-50
+────────────────────────────────────────────────────────────────────────────────
+   34    resource "aws_security_group" "webserver" {
+   ..  
+   45  ┌   egress {
+   46  │     from_port = 0
+   47  │     to_port = 0
+   48  │     protocol = "-1"
+   49  │     cidr_blocks = ["0.0.0.0/0"]
+   50  └   }
+   51    }
+────────────────────────────────────────────────────────────────────────────────
+          ID aws-ec2-add-description-to-security-group-rule
+      Impact Descriptions provide context for the firewall rule reasons
+  Resolution Add descriptions for all security groups rules
+
+  More Information
+  - https://aquasecurity.github.io/tfsec/v1.28.1/checks/aws/ec2/add-description-to-security-group-rule/
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+────────────────────────────────────────────────────────────────────────────────
+
+
+  timings
+  ──────────────────────────────────────────
+  disk i/o             3.0008ms
+  parsing              1.0006ms
+  adaptation           0s
+  checks               6.2927ms
+  total                10.2941ms
+
+  counts
+  ──────────────────────────────────────────
+  modules downloaded   0
+  modules processed    1
+  blocks processed     22
+  files read           5
+
+  results
+  ──────────────────────────────────────────
+  passed               5
+  ignored              0
+  critical             2
+  high                 2
+  medium               1
+  low                  2
+
+  5 passed, 7 potential problem(s) detected.
+
+PS C:\My-code-sandbox\Infrastructure-QRift-Blockchain-new-May2024\Game_OCT_Project> 

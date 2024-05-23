@@ -1,0 +1,301 @@
+
+
+
+
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project> npm install web3
+
+added 65 packages in 10s
+
+21 packages are looking for funding
+  run `npm fund` for details
+npm notice
+npm notice New minor version of npm available! 10.7.0 -> 10.8.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v10.8.0
+npm notice To update run: npm install -g npm@10.8.0
+npm notice
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project> 
+
+
+
+
+
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project> node prime-number-web3.js
+C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project\prime-number-web3.js:7
+const web3 = new Web3(providerUrl);
+             ^
+
+TypeError: Web3 is not a constructor
+    at Object.<anonymous> (C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project\prime-number-web3.js:7:14)
+    at Module._compile (node:internal/modules/cjs/loader:1455:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1534:10)
+    at Module.load (node:internal/modules/cjs/loader:1265:32)
+    at Module._load (node:internal/modules/cjs/loader:1081:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:187:14)
+    at node:internal/main/run_main_module:28:49
+
+Node.js v22.0.0
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project> node prime-number-web3.js
+C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project\prime-number-web3.js:7
+const web3 = new Web3(providerUrl);
+             ^
+
+TypeError: Web3 is not a constructor
+    at Object.<anonymous> (C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project\prime-number-web3.js:7:14)
+    at Module._compile (node:internal/modules/cjs/loader:1455:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1534:10)
+    at Module.load (node:internal/modules/cjs/loader:1265:32)
+    at Module._load (node:internal/modules/cjs/loader:1081:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:187:14)
+    at node:internal/main/run_main_module:28:49
+
+Node.js v22.0.0
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project> node prime-number-web3.js
+17 is a prime number.
+(node:19772) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project> node prime-number-web3.js
+3.24389482180324e+24 is not a prime number.
+(node:8588) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project> 
+
+
+
+
+--------
+
+
+
+C:\Users\PKumar.ADS-XXXXX>powershell
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\PKumar.ADS-XXXXX> & $Env:ProgramFiles\Docker\Docker\DockerCli.exe -SwitchDaemon .
+switching to windows engine: Post "http://ipc/engine/switch": open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.
+PS C:\Users\PKumar.ADS-XXXXX> & $Env:ProgramFiles\Docker\Docker\DockerCli.exe -SwitchDaemon .
+
+
+
+
+
+PS C:\My-code-sandbox\Infra-TF-new\Game_OCT_Project\files> docker build -t my-web3-app .
+ERROR: error during connect: this error may indicate that the docker daemon is not running: Get "http://%2F%2F.%2Fpipe%2Fdocker_engine/_ping": open //./pipe/docker_engine: The system cannot find the file specified.
+
+
+
+
+
+https://docs.docker.com/desktop/wsl/
+
+
+
+
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$ docker build -t my-web3-app .
+[+] Building 6.3s (7/9)                                                                                                                      docker:default
+ => [internal] load build definition from Dockerfile                                                                                                   0.0s
+ => => transferring dockerfile: 540B                                                                                                                   0.0s
+ => [internal] load .dockerignore                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:alpine                                                                                         6.2s
+ => CANCELED [1/5] FROM docker.io/library/node:alpine@sha256:181d0e0248e825fa1c056c7ef85e91fbad340caf0814d30b81467daea4637045                          0.0s
+ => => resolve docker.io/library/node:alpine@sha256:181d0e0248e825fa1c056c7ef85e91fbad340caf0814d30b81467daea4637045                                   0.0s
+ => => sha256:52a11a0f986825264fbee6eb65fd2504dae84a02a30ad43bc22b94829a5c7855 7.21kB / 7.21kB                                                         0.0s
+ => => sha256:181d0e0248e825fa1c056c7ef85e91fbad340caf0814d30b81467daea4637045 1.43kB / 1.43kB                                                         0.0s
+ => => sha256:bb2c8d4f552495b74e891adfcc1dac094dc72741f01d69c6ac73635d3258928c 1.16kB / 1.16kB                                                         0.0s
+ => [internal] load build context                                                                                                                      0.0s
+ => => transferring context: 3.17kB                                                                                                                    0.0s
+ => CACHED [2/5] WORKDIR /app                                                                                                                          0.0s
+ => ERROR [3/5] COPY package.json ./                                                                                                                   0.0s
+------
+ > [3/5] COPY package.json ./:
+------
+Dockerfile:8
+--------------------
+   6 |
+   7 |     # Copy the package.json file
+   8 | >>> COPY package.json ./
+   9 |
+  10 |     # Install dependencies
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref 17805ba9-1031-4428-bfa2-49b0c8be5866::unbub8ro8cpj2vdwbgnykrlnz: "/package.json": not found
+
+
+
+
+
+
+
+
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$ docker build -t my-web3-app .
+[+] Building 20.6s (9/9) FINISHED                                                                                                            docker:default
+ => [internal] load .dockerignore                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                        0.0s
+ => [internal] load build definition from Dockerfile                                                                                                   0.0s
+ => => transferring dockerfile: 401B                                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/node:alpine                                                                                         0.8s
+ => [1/4] FROM docker.io/library/node:alpine@sha256:181d0e0248e825fa1c056c7ef85e91fbad340caf0814d30b81467daea4637045                                   7.7s
+ => => resolve docker.io/library/node:alpine@sha256:181d0e0248e825fa1c056c7ef85e91fbad340caf0814d30b81467daea4637045                                   0.0s
+ => => sha256:181d0e0248e825fa1c056c7ef85e91fbad340caf0814d30b81467daea4637045 1.43kB / 1.43kB                                                         0.0s
+ => => sha256:bb2c8d4f552495b74e891adfcc1dac094dc72741f01d69c6ac73635d3258928c 1.16kB / 1.16kB                                                         0.0s
+ => => sha256:52a11a0f986825264fbee6eb65fd2504dae84a02a30ad43bc22b94829a5c7855 7.21kB / 7.21kB                                                         0.0s
+ => => sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8 3.41MB / 3.41MB                                                         0.7s
+ => => sha256:18ebf809920da8a62718c77ddeb590486988542932156695b85457c488f47831 46.46MB / 46.46MB                                                       5.3s
+ => => extracting sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8                                                              0.1s
+ => => sha256:c27d1f6ad48534e093eca7a6e50650c5bf8ec833b8439cd2c90c02d599490dbb 1.38MB / 1.38MB                                                         1.1s
+ => => sha256:356327f5b7576790e556f97eb7822b284bb8131e207a3a28bd519e44e5bdce00 450B / 450B                                                             1.4s
+ => => extracting sha256:18ebf809920da8a62718c77ddeb590486988542932156695b85457c488f47831                                                              2.0s
+ => => extracting sha256:c27d1f6ad48534e093eca7a6e50650c5bf8ec833b8439cd2c90c02d599490dbb                                                              0.1s
+ => => extracting sha256:356327f5b7576790e556f97eb7822b284bb8131e207a3a28bd519e44e5bdce00                                                              0.0s
+ => [internal] load build context                                                                                                                      0.0s
+ => => transferring context: 481B                                                                                                                      0.0s
+ => [2/4] WORKDIR /app                                                                                                                                 0.2s
+ => [3/4] RUN npm install web3                                                                                                                        10.9s
+ => [4/4] COPY . .                                                                                                                                     0.0s
+ => exporting to image                                                                                                                                 1.0s
+ => => exporting layers                                                                                                                                1.0s
+ => => writing image sha256:bcd6f7d5ae05147fc528991ee92693ad9787d32d838125f8f5846a5dc9f1f628                                                           0.0s
+ => => naming to docker.io/library/my-web3-app                                                                                                         0.0s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$
+
+
+
+
+
+
+
+
+FROM node:alpine
+
+
+WORKDIR /app
+
+
+#COPY package.json ./
+
+
+RUN npm install web3
+
+
+COPY . .
+
+#EXPOSE 3000
+
+
+CMD [ "node", "prime-number-web3.js" ]
+
+
+
+
+
+
+Improvised , hardened and security enhanced code 
+
+
+
+
+FROM node:18-alpine AS builder
+
+
+WORKDIR /app
+
+
+#RUN npm install --production
+
+
+FROM node:18-alpine
+
+
+COPY --from=builder /app/package*.json ./
+#COPY --from=builder /app/prime-number-web3.js ./
+
+# Set user for the application process
+RUN adduser --disabled-password --shell /bin/sh nodeuser
+
+USER nodeuser
+
+# Expose port (optional)
+EXPOSE 3000
+
+# Start the application
+CMD [ "node", "prime-number-web3.js" ]
+
+
+
+
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$ docker build -t my-web3-app .
+[+] Building 1.2s (8/8) FINISHED                                                                                                             docker:default
+ => [internal] load .dockerignore                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                        0.0s
+ => [internal] load build definition from Dockerfile                                                                                                   0.0s
+ => => transferring dockerfile: 763B                                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/node:18-alpine                                                                                      0.8s
+ => CACHED [builder 1/2] FROM docker.io/library/node:18-alpine@sha256:3120b21ed49333280d78dfe44b6eabc25c3309c3366bbcfa409b804334fd16ab                 0.0s
+ => CACHED [builder 2/2] WORKDIR /app                                                                                                                  0.0s
+ => [stage-1 2/3] COPY --from=builder /app/package*.json ./                                                                                            0.0s
+ => [stage-1 3/3] RUN adduser --disabled-password --shell /bin/sh nodeuser                                                                             0.3s
+ => exporting to image                                                                                                                                 0.0s
+ => => exporting layers                                                                                                                                0.0s
+ => => writing image sha256:d3265590521970997186b70a216576a915d84d6db91ac69846b6ef65ec2ed755                                                           0.0s
+ => => naming to docker.io/library/my-web3-app                                                                                                         0.0s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+
+
+
+
+
+
+
+
+
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$ docker -list
+Unable to parse logging level: ist
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$ docker images
+REPOSITORY                                                TAG                                                                          IMAGE ID       CREATED         SIZE
+my-web3-app                                               latest                                                                       d32655905219   6 hours ago     127MB
+<none>                                                    <none>                                                                       bcd6f7d5ae05   7 hours ago     295MB
+kubernetesui/metrics-scraper                              latest                                                                       2c5b16b4402b   3 months ago    50.2MB
+kasmweb/parrotos-5-desktop                                1.14.0-rolling                                                               dddff8b7c82d   3 months ago    4.06GB
+amazon/aws-lambda-python                                  latest                                                                       fe608376814f   3 months ago    558MB
+snyk/snyk                                                 docker                                                                       639ab84cb876   4 months ago    463MB
+kalilinux/kali-rolling                                    latest                                                                       798240799a45   4 months ago    125MB
+vklokun/docker-desktop-extension                          0.1.1                                                                        2ccb40a58267   4 months ago    151MB
+amazon/aws-xray-daemon                                    latest                                                                       b0bf3dc12c54   5 months ago    157MB
+alpine                                                    latest                                                                       f8c20f8bbcb6   5 months ago    7.38MB
+greenbone/notus-scanner                                   latest                                                                       d66412b4679c   6 months ago    371MB
+docker/welcome-to-docker                                  latest                                                                       c1f619b6477e   6 months ago    18.6MB
+hubproxy.docker.internal:5555/docker/desktop-kubernetes   kubernetes-v1.28.2-cni-v1.3.0-critools-v1.28.0-cri-dockerd-v0.3.4-1-debian   1d7e8203bdb9   7 months ago    430MB
+snyk/snyk-docker-desktop-extension                        0.7.4                                                                        f55b4f873f38   7 months ago    77.5kB
+registry.k8s.io/kube-apiserver                            v1.28.2                                                                      cdcab12b2dd1   8 months ago    126MB
+registry.k8s.io/kube-proxy                                v1.28.2                                                                      c120fed2beb8   8 months ago    73.1MB
+registry.k8s.io/kube-controller-manager                   v1.28.2                                                                      55f13c92defb   8 months ago    122MB
+registry.k8s.io/kube-scheduler                            v1.28.2                                                                      7a5d9d67a13f   8 months ago    60.1MB
+teamgosh/docker-extension                                 6.1.30                                                                       93bd936f23ec   8 months ago    828MB
+registry.k8s.io/etcd                                      3.5.9-0                                                                      73deb9a3f702   12 months ago   294MB
+docker/desktop-vpnkit-controller                          dc331cb22850be0cdd97c84a9cfecaf44a1afb6e                                     556098075b3d   12 months ago   36.2MB
+docker/disk-usage-extension                               0.2.7                                                                        94a994303197   13 months ago   2.81MB
+registry.k8s.io/coredns/coredns                           v1.10.1                                                                      ead0a4a53df8   15 months ago   53.6MB
+registry.k8s.io/etcd                                      3.5.7-0                                                                      86b6af7dd652   16 months ago   296MB
+amazon/aws-alb-ingress-controller                         v2.4.5                                                                       9387180215c2   18 months ago   65.9MB
+anchore/docker-desktop-extension                          0.5.1                                                                        535f4e97696b   19 months ago   916MB
+registry.k8s.io/pause                                     3.9                                                                          e6f181688397   19 mon
+
+
+
+
+
+
+
+
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$ kubectl apply -f deployment.yaml
+Unable to connect to the server: dial tcp: lookup 7A5D533E43675887A97HRJ.gr7.eu-central-1.eks.amazonaws.com on 172.25.91.1:53: no such host
+test@Autopilot-8Rl44:/mnt/c/My-code-sandbox/Infrastructure-Blockchain-new-May2024/Game_OCT_Project/files$
+
+
+

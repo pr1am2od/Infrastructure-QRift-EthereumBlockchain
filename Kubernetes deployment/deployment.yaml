@@ -1,0 +1,77 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "web3-prime-number"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "web3-prime-number-deployment"
+  namespace: "web3-prime-number"
+spec:
+  selector:
+    matchLabels:
+      app: "web3-prime-number"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "web3-prime-number"
+    spec:
+      containers:
+      - image: alpine/docker-web3-prime-number
+        imagePullPolicy: Always
+        imagePullSecrets:  # Define image pull secrets if needed
+      - name: qrift-RSA2024
+        name: "web3-prime-number"
+        securityContext:
+        runAsUser: 1000
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "service-web3-prime-number"
+  namespace: "web3-prime-number"
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: "web3-prime-number"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "web3-prime-number-ingress"
+  namespace: "web3-prime-number"
+  annotations:
+    alb.ingress.kubernetes.io/group.name: web3-prod-eks
+    external-dns.alpha.kubernetes.io/hostname: web3-prod-eks.theoctgame.xyz #For route53 propagation
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
+    #alb.ingress.kubernetes.io/ssl-redirect: "443"
+    #alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443, "HTTP":80}]'
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/conditions.service-web3-prime-number: >
+      [{"Field":"host-header", "HostHeaderConfig":{"Values":["web3-prod-eks.theoctgame.xyz"]}}]
+  labels:
+    app: web3-prime-number-ingress
+spec:
+  ingressClassName: alb
+  #tls:
+  #- hosts:
+  #  - "*.dev.theoctgame.xyz.services"
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "service-web3-prime-number"
+                port:
+                  number: 80
